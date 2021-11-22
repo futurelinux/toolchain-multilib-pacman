@@ -1,0 +1,12 @@
+DEJAGNU_VER=1.6.3
+source=(https://ftp.gnu.org/gnu/dejagnu/dejagnu-${DEJAGNU_VER}.tar.gz)
+
+build() {
+	cd dejagnu-${DEJAGNU_VER}
+
+	./configure --prefix=/tools
+
+	make install
+
+	make check || true
+}

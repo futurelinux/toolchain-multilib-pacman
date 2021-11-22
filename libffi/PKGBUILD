@@ -1,0 +1,24 @@
+LIBFFI_VER=3.4.2
+source=(https://sourceware.org/ftp/libffi/libffi-${LIBFFI_VER}.tar.gz)
+
+build() {
+	cd libffi-${LIBFFI_VER}
+
+	./configure --prefix=/tools
+
+	make
+
+	make install
+
+	make distclean
+
+	CC="${LFS_TGT}-gcc -m32" ./configure \
+	    --host=${LFS_TGT32}              \
+	    --prefix=/tools                  \
+	    --libdir=/tools/lib32
+
+	make
+
+	make DESTDIR=$PWD/DESTDIR_32 install
+	cp -Rv DESTDIR_32/tools/lib32/* /tools/lib32
+}

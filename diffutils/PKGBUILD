@@ -1,0 +1,14 @@
+DIFFUTILS_VER=3.8
+source=(https://ftp.gnu.org/gnu/diffutils/diffutils-${DIFFUTILS_VER}.tar.xz)
+
+build() {
+	cd diffutils-${DIFFUTILS_VER}
+
+	./configure --prefix=/tools
+
+	make
+
+	make check
+
+	make install
+}

@@ -1,0 +1,30 @@
+OPENSSL_VER=1.1.1l
+source=(https://www.openssl.org/source/openssl-${OPENSSL_VER}.tar.gz)
+
+build() {
+	cd openssl-${OPENSSL_VER}
+
+	./config --prefix=/tools             \
+	         --openssldir=/tools/etc/ssl \
+	         --libdir=lib                \
+	         shared                      \
+	         no-ssl3-method
+	make
+	make -j1 MANSUFFIX=ssl install
+
+	make distclean
+
+	MACHINE="i686"                    \
+	CC="${LFS_TGT}-gcc -m32"          \
+	CXX="${LFS_TGT}-g++ -m32"         \
+	    ./config                      \
+	    --prefix=/tools               \
+	    --openssldir=/tools/etc/ssl   \
+	    --libdir=lib32                \
+	    shared                        \
+	    no-ssl3-method
+	    
+	make
+	make DESTDIR=$PWD/DESTDIR install
+	cp -Rv DESTDIR/tools/lib32/* /tools/lib32
+}

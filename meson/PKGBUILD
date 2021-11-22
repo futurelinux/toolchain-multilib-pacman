@@ -1,0 +1,11 @@
+MESON_VER=0.60.1
+source=(https://github.com/mesonbuild/meson/releases/download/${MESON_VER}/meson-${MESON_VER}.tar.gz)
+
+build() {
+	cd meson-${MESON_VER}
+
+	python3 setup.py build
+
+	python3 setup.py install --root=dest
+	cp -rv dest/* /tools
+}

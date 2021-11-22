@@ -1,0 +1,14 @@
+PATCH_VER=2.7.6
+source=(https://ftp.gnu.org/gnu/patch/patch-${PATCH_VER}.tar.xz)
+
+build() {
+	cd patch-${PATCH_VER}
+
+	./configure --prefix=/tools
+
+	make
+
+	make check
+
+	make install
+}

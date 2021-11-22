@@ -1,0 +1,14 @@
+FAKEROOT_VER=1.26
+source=(http://http.debian.net/debian/pool/main/f/fakeroot/fakeroot_${FAKEROOT_VER}.orig.tar.gz)
+
+build() {
+	cd fakeroot-${FAKEROOT_VER}
+
+	./configure --prefix=/tools                 \
+	            --libdir=/tools/lib/libfakeroot \
+	            --with-ipc=sysv
+
+	make
+
+	make install
+}

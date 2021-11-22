@@ -1,0 +1,18 @@
+PACMAN_VER=6.0.1
+source=(https://sources.archlinux.org/other/pacman/pacman-${PACMAN_VER}.tar.xz)
+
+build() {
+	cd pacman-${PACMAN_VER}
+
+	meson --prefix=/tools                      \
+	      --buildtype=release                  \
+	      --sysconfdir=/tools/etc              \
+	      -Ddoc=disabled                       \
+	      -Dgpgme=disabled                     \
+	      build
+
+	meson compile -C build
+
+	DESTDIR="$PWD/DESTDIR" meson install -C build
+	cp -av DESTDIR/tools/* /tools/
+}

@@ -1,0 +1,23 @@
+LIBCAP_VER=2.60
+source=(https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-${LIBCAP_VER}.tar.xz)
+
+build() {
+	cd  libcap-${LIBCAP_VER}
+
+	sed -i '/install -m.*STA/d' libcap/Makefile
+
+	make prefix=/tools lib=lib PAM_CAP=no
+
+	make prefix=/tools lib=lib PAM_CAP=no install
+
+	chmod -v 755 /tools/lib/lib{cap,psx}.so.${LIBCAP_VER}
+	
+	make distclean
+
+	make CC="${LFS_TGT}-gcc -m32" PAM_CAP=no
+
+	make CC="${LFS_TGT}-gcc -m32" PAM_CAP=no lib=lib32 prefix=$PWD/DESTDIR/tools -C libcap install
+	cp -Rv DESTDIR/tools/lib32/* /tools/lib32
+	sed -e "s|^libdir=.*|libdir=/tools/lib32|" -i /tools/lib32/pkgconfig/lib{cap,psx}.pc
+	chmod -v 755 /tools/lib32/libcap.so.${LIBCAP_VER}
+}

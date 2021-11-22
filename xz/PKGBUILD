@@ -1,0 +1,28 @@
+XZ_VER=5.2.5
+source=(http://tukaani.org/xz/xz-${XZ_VER}.tar.xz)
+
+build() {
+	cd xz-${XZ_VER}
+
+	./configure --prefix=/tools
+
+	make
+
+	make check
+
+	make install
+
+	make distclean &&
+	CC="${LFS_TGT}-gcc -m32"  \
+	./configure               \
+	    --prefix=/tools       \
+	    --libdir=/tools/lib32 \
+	    --host="${LFS_TGT32}"
+
+	make
+
+	make check
+
+	make DESTDIR=$PWD/DESTDIR_32 install &&
+	cp -Rv DESTDIR_32/tools/lib32/* /tools/lib32
+}

@@ -1,0 +1,14 @@
+FILE_VER=5.41
+source=(http://ftp.astron.com/pub/file/file-${FILE_VER}.tar.gz)
+
+build() {
+	cd file-${FILE_VER}
+
+	./configure --prefix=/tools
+
+	make
+
+	make check
+
+	make install
+}

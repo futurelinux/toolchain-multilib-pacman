@@ -1,0 +1,20 @@
+TCL_VER=8.6.11
+source=(https://downloads.sourceforge.net/tcl/tcl${TCL_VER}-src.tar.gz)
+
+build() {
+	cd tcl${TCL_VER}/unix
+
+	./configure --prefix=/tools
+
+	make
+
+	TZ=UTC make test
+
+	make install
+
+	chmod -v u+w /tools/lib/libtcl8.6.so
+
+	make install-private-headers
+
+	ln -sv tclsh8.6 /tools/bin/tclsh
+}

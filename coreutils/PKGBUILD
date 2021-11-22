@@ -1,0 +1,14 @@
+COREUTILS_VER=9.0
+source=(https://ftp.gnu.org/gnu/coreutils/coreutils-${COREUTILS_VER}.tar.xz)
+
+build() {
+	cd coreutils-${COREUTILS_VER}
+
+	./configure --prefix=/tools --enable-install-program=hostname
+
+	make
+
+	make RUN_EXPENSIVE_TESTS=yes check
+
+	make install
+}

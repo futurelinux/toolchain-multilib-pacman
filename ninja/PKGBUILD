@@ -1,0 +1,8 @@
+NINJA_VER=1.10.2
+source=(https://github.com/ninja-build/ninja/archive/v${NINJA_VER}/ninja-${NINJA_VER}.tar.gz)
+
+build() {
+cd ninja-${NINJA_VER}
+python3 ./configure.py --bootstrap
+cp -v ninja /tools/bin
+}

@@ -1,0 +1,59 @@
+GCC_VER=11.2.0
+GMP_VER=6.2.1
+MPFR_VER=4.1.0
+MPC_VER=1.2.1
+source=(https://ftp.gnu.org/gnu/gcc/gcc-${GCC_VER}/gcc-${GCC_VER}.tar.xz
+https://ftp.gnu.org/gnu/gmp/gmp-${GMP_VER}.tar.xz
+https://ftp.gnu.org/gnu/mpfr/mpfr-${MPFR_VER}.tar.xz
+https://ftp.gnu.org/gnu/mpc/mpc-${MPC_VER}.tar.gz)
+
+build() {
+	cd gcc-${GCC_VER}
+
+	cat gcc/limitx.h gcc/glimits.h gcc/limity.h > \
+	  `dirname $($LFS_TGT-gcc -print-libgcc-file-name)`/include-fixed/limits.h
+
+	for file in gcc/config/{linux,i386/linux{,64}}.h
+	do
+		cp -uv $file{,.orig}
+		sed -e 's@/lib\(64\)\?\(32\)\?/ld@/tools&@g' \
+		    -e 's@/usr@/tools@g' $file.orig > $file
+		echo '
+#undef STANDARD_STARTFILE_PREFIX_1
+#undef STANDARD_STARTFILE_PREFIX_2
+#define STANDARD_STARTFILE_PREFIX_1 "/tools/lib/"
+#define STANDARD_STARTFILE_PREFIX_2 ""' >> $file
+		touch $file.orig
+	done
+
+	sed -i -e 's@/lib/ld-linux.so.2@/lib32/ld-linux.so.2@g' gcc/config/i386/linux64.h
+	sed -i -e '/MULTILIB_OSDIRNAMES/d' gcc/config/i386/t-linux64
+	echo "MULTILIB_OSDIRNAMES = m64=../lib m32=../lib32" >> gcc/config/i386/t-linux64
+
+	mv ../mpfr-${MPFR_VER} mpfr
+	mv ../gmp-${GMP_VER} gmp
+	mv ../mpc-${MPC_VER} mpc
+
+	mkdir  build
+	cd     build
+
+	CC=$LFS_TGT-gcc                                    \
+	CXX=$LFS_TGT-g++                                   \
+	AR=$LFS_TGT-ar                                     \
+	RANLIB=$LFS_TGT-ranlib                             \
+	../configure                                       \
+	    --prefix=/tools                                \
+	    --with-local-prefix=/tools                     \
+	    --with-native-system-header-dir=/tools/include \
+	    --enable-languages=c,c++                       \
+	    --disable-libstdcxx-pch                        \
+	    --enable-multilib                              \
+	    --with-multilib-list=m32,m64                   \
+	    --with-system-zlib                             \
+	    --disable-bootstrap                            \
+	    --disable-libgomp
+
+	make
+	make install
+	ln -sv gcc /tools/bin/cc
+}

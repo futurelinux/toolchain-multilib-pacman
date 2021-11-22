@@ -1,0 +1,18 @@
+PKG_CONFIG_VER=0.29.2
+source=(https://pkg-config.freedesktop.org/releases/pkg-config-${PKG_CONFIG_VER}.tar.gz)
+
+build() {
+	cd pkg-config-${PKG_CONFIG_VER}
+
+	./configure --prefix=/tools            \
+	            --with-internal-glib       \
+	            --disable-compile-warnings \
+	            --disable-host-tool        \
+	            --disable-shared
+#	            --docdir=/tools/share/doc/pkg-config
+
+	make
+
+	make install
+}
+

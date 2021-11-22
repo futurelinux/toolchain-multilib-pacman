@@ -1,0 +1,14 @@
+MAKE_VER=4.3
+source=(https://ftp.gnu.org/gnu/make/make-${MAKE_VER}.tar.gz)
+
+build() {
+	cd make-${MAKE_VER}
+
+	./configure --prefix=/tools --without-guile
+
+	make
+
+	make check
+
+	make install
+}

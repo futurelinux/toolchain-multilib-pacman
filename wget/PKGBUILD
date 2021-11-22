@@ -1,0 +1,21 @@
+WGET_VER=1.21.2
+source=(https://ftp.gnu.org/gnu/wget/wget-${WGET_VER}.tar.gz)
+
+build() {
+	cd wget-${WGET_VER}
+
+	./configure --prefix=/tools    \
+		    --disable-pcre     \
+		    --disable-pcre2    \
+		    --with-ssl=openssl \
+		    --without-libidn   \
+		    --without-libpsl   \
+		    --without-metalink \
+		    --with-libssl-prefix=/tools
+
+	make
+
+	make install
+
+	echo "ca_certificate = /tools/etc/ssl/certs/ca-certificates.crt" > /tools/etc/wgetrc
+}

@@ -1,0 +1,12 @@
+VIM_VER=8.2.3458
+source=(https://github.com/vim/vim/archive/v${VIM_VER}/vim-${VIM_VER}.tar.gz)
+
+build() {
+	cd vim-${VIM_VER}
+
+	./configure --prefix=/tools --with-features=huge --with-x=no --enable-gui=no
+
+	make
+
+	make install
+}

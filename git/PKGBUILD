@@ -1,0 +1,16 @@
+GIT_VER=2.34.0
+source=(https://www.kernel.org/pub/software/scm/git/git-${GIT_VER}.tar.xz)
+
+build() {
+	cd git-${GIT_VER}
+
+	./configure --prefix=/tools                  \
+		    --with-editor=/tools/bin/nano    \
+		    --with-perl=/tools/bin/perl      \
+		    --with-python=/tools/bin/python3 \
+		    --without-tcltk
+
+	make
+
+	make install
+}

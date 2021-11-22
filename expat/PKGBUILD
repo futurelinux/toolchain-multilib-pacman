@@ -1,0 +1,12 @@
+EXPAT_VER=2.4.1
+source=(https://github.com/libexpat/libexpat/releases/download/R_${EXPAT_VER//./_}/expat-${EXPAT_VER}.tar.xz)
+
+build() {
+	cd  expat-${EXPAT_VER}
+
+	./configure --prefix=/tools
+
+	make
+
+	make install
+}

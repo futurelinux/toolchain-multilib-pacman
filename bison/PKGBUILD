@@ -1,0 +1,14 @@
+BISON_VER=3.8.2
+source=(https://ftp.gnu.org/gnu/bison/bison-${BISON_VER}.tar.xz)
+
+build() {
+	cd bison-${BISON_VER}
+
+	./configure --prefix=/tools
+
+	make
+
+	make check
+
+	make install
+}

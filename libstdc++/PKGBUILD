@@ -1,0 +1,22 @@
+GCC_VER=11.2.0
+source=(https://ftp.gnu.org/gnu/gcc/gcc-${GCC_VER}/gcc-${GCC_VER}.tar.xz)
+
+build() {
+	cd gcc-${GCC_VER}
+
+	mkdir  build
+	cd     build
+
+	../libstdc++-v3/configure           \
+	    --host=$LFS_TGT                 \
+	    --prefix=/tools                 \
+	    --disable-multilib              \
+	    --disable-nls                   \
+	    --disable-libstdcxx-threads     \
+	    --disable-libstdcxx-pch         \
+	    --with-gxx-include-dir=/tools/$LFS_TGT/include/c++/${GCC_VER}
+
+	make
+
+	make install
+}

@@ -1,0 +1,18 @@
+PYTHON3_VER=3.10.0
+source=(https://www.python.org/ftp/python/${PYTHON3_VER}/Python-${PYTHON3_VER}.tar.xz)
+
+build() {
+	cd Python-${PYTHON3_VER}
+
+#	sed -i '/def add_multiarch_paths/a \        return' setup.py
+
+	./configure --prefix=/tools        \
+	            --enable-shared        \
+	            --with-system-expat    \
+	            --with-system-ffi      \
+	            --with-ensurepip=yes
+
+	make
+
+	make install
+}

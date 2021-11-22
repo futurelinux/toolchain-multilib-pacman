@@ -1,0 +1,11 @@
+LINUX_VER=5.15.4
+source=(https://www.kernel.org/pub/linux/kernel/v5.x/linux-${LINUX_VER}.tar.xz)
+
+build() {
+	cd linux-${LINUX_VER}
+
+	make mrproper
+
+	make headers
+	cp -rv usr/include/* /tools/include
+}

@@ -1,0 +1,12 @@
+LIBARCHIVE_VER=3.5.2
+source=(https://github.com/libarchive/libarchive/releases/download/v${LIBARCHIVE_VER}/libarchive-${LIBARCHIVE_VER}.tar.xz)
+
+build() {
+	cd libarchive-${LIBARCHIVE_VER}
+
+	./configure --prefix=/tools --without-xml2
+
+	make
+
+	make install
+}

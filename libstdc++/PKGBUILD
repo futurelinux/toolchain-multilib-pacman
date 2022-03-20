@@ -1,8 +1,9 @@
-GCC_VER=11.2.0
-source=(https://ftp.gnu.org/gnu/gcc/gcc-${GCC_VER}/gcc-${GCC_VER}.tar.xz)
+pkgname=libstdc++
+pkgver=11.2.0
+source=(https://ftp.gnu.org/gnu/gcc/gcc-$pkgver/gcc-$pkgver.tar.xz)
 
 build() {
-	cd gcc-${GCC_VER}
+	cd  gcc-$pkgver
 
 	mkdir  build
 	cd     build
@@ -14,7 +15,7 @@ build() {
 	    --disable-nls                   \
 	    --disable-libstdcxx-threads     \
 	    --disable-libstdcxx-pch         \
-	    --with-gxx-include-dir=/tools/$LFS_TGT/include/c++/${GCC_VER}
+	    --with-gxx-include-dir=/tools/$LFS_TGT/include/c++/$pkgver
 
 	make
 

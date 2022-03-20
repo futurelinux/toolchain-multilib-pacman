@@ -1,15 +1,15 @@
-pkgname=gcc_pass1
+pkgname=gcc-pass1
 pkgver=11.2.0
 gmp_ver=6.2.1
 mpfr_ver=4.1.0
 mpc_ver=1.2.1
-source=(https://ftp.gnu.org/gnu/${pkgname%_*}/${pkgname%_*}-$pkgver/${pkgname%_*}-$pkgver.tar.xz
-https://ftp.gnu.org/gnu/gmp/gmp-${gmp_ver}.tar.xz
-https://ftp.gnu.org/gnu/mpfr/mpfr-${mpfr_ver}.tar.xz
-https://ftp.gnu.org/gnu/mpc/mpc-${mpc_ver}.tar.gz)
+source=(https://ftp.gnu.org/gnu/${pkgname%-*}/${pkgname%-*}-$pkgver/${pkgname%-*}-$pkgver.tar.xz
+	https://ftp.gnu.org/gnu/gmp/gmp-${gmp_ver}.tar.xz
+	https://ftp.gnu.org/gnu/mpfr/mpfr-${mpfr_ver}.tar.xz
+	https://ftp.gnu.org/gnu/mpc/mpc-${mpc_ver}.tar.gz)
 
 build() {
-	cd ${pkgname%_*}-$pkgver
+	cd ${pkgname%-*}-$pkgver
 
 	mv ../mpfr-${mpfr_ver} mpfr
 	mv ../gmp-${gmp_ver} gmp

@@ -1,9 +1,9 @@
-pkgname=binutils_pass1
+pkgname=binutils-pass1
 pkgver=2.38
-source=(https://ftp.gnu.org/gnu/${pkgname%_*}/${pkgname%_*}-$pkgver.tar.xz)
+source=(https://ftp.gnu.org/gnu/${pkgname%-*}/${pkgname%-*}-$pkgver.tar.xz)
 
 build() {
-	cd ${pkgname%_*}-$pkgver
+	cd ${pkgname%-*}-$pkgver
 
 	mkdir -v build
 	cd       build

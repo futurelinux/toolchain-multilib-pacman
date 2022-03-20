@@ -1,11 +1,11 @@
-binutils_pass1
-gcc_pass1
-linux_api_headers
+binutils-pass1
+gcc-pass1
+linux-api-headers
 glibc
 libstdc++
 zlib
-binutils_pass2
-gcc_pass2
+binutils-pass2
+gcc-pass2
 tcl
 expect
 dejagnu

@@ -1,11 +1,8 @@
 build() {
-#	strip --strip-debug /tools/lib/*
-#	/usr/bin/strip --strip-unneeded /tools/{,s}bin/*
+	strip --strip-debug /tools/lib{,32}/* || true
+	/usr/bin/strip --strip-unneeded /tools/{,s}bin/* || true
 
 	rm -rf /tools/{,share}/{info,man,doc}
 
-	find /tools/{lib,libexec} -name \*.la -delete
-
-#	strip --strip-debug /tools/lib32/*
-	find /tools/lib32 -name \*.la -delete
+	find /tools/{lib{,32},libexec} -name \*.la -delete
 }

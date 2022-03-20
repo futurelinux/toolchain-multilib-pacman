@@ -1,5 +1,5 @@
 pkgname=git
-pkgver=2.34.1
+pkgver=2.35.1
 source=(https://www.kernel.org/pub/software/scm/$pkgname/$pkgname-$pkgver.tar.xz)
 
 build() {

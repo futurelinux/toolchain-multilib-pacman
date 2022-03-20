@@ -1,14 +1,13 @@
-PATCH_VER=2.7.6
-source=(https://ftp.gnu.org/gnu/patch/patch-${PATCH_VER}.tar.xz)
+pkgname=patch
+pkgver=2.7.6
+source=(https://ftp.gnu.org/gnu/$pkgname/$pkgname-$pkgver.tar.xz)
 
 build() {
-	cd patch-${PATCH_VER}
+	cd $pkgname-$pkgver
 
 	./configure --prefix=/tools
 
 	make
-
-	make check
 
 	make install
 }

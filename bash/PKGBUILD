@@ -1,16 +1,15 @@
-BASH_VER=5.1.8
-source=(https://ftp.gnu.org/gnu/bash/bash-${BASH_VER}.tar.gz)
+pkgname=bash
+pkgver=5.1.8
+source=(https://ftp.gnu.org/gnu/$pkgname/$pkgname-$pkgver.tar.gz)
 
 build() {
-	cd bash-${BASH_VER}
+	cd $pkgname-$pkgver
 
 	./configure --prefix=/tools --without-bash-malloc
 
 	make
 
-	make tests
-
 	make install
 
-	ln -sv bash /tools/bin/sh
+	ln -vsf bash /tools/bin/sh
 }

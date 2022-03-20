@@ -1,8 +1,9 @@
-LIBFFI_VER=3.4.2
-source=(https://sourceware.org/ftp/libffi/libffi-${LIBFFI_VER}.tar.gz)
+pkgname=libffi
+pkgver=3.4.2
+source=(https://sourceware.org/ftp/$pkgname/$pkgname-$pkgver.tar.gz)
 
 build() {
-	cd libffi-${LIBFFI_VER}
+	cd $pkgname-$pkgver
 
 	./configure --prefix=/tools
 

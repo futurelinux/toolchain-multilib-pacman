@@ -1,14 +1,13 @@
-FINDUTILS_VER=4.8.0
-source=(https://ftp.gnu.org/gnu/findutils/findutils-${FINDUTILS_VER}.tar.xz)
+pkgname=findutils
+pkgver=4.8.0
+source=(https://ftp.gnu.org/gnu/$pkgname/$pkgname-$pkgver.tar.xz)
 
 build() {
-	cd findutils-${FINDUTILS_VER}
+	cd $pkgname-$pkgver
 
 	./configure --prefix=/tools
 
 	make
-
-	make check
 
 	make install
 }

@@ -1,8 +1,9 @@
-BZIP2_VER=1.0.8
-source=(https://sourceware.org/pub/bzip2/bzip2-${BZIP2_VER}.tar.gz)
+pkgname=bzip2
+pkgver=1.0.8
+source=(https://www.bzip.org/$pkgver/$pkgname-$pkgver.tar.gz)
 
 build() {
-	cd bzip2-${BZIP2_VER}
+	cd $pkgname-$pkgver
 
 	make -f Makefile-libbz2_so
 	make clean

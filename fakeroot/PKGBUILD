@@ -1,8 +1,9 @@
-FAKEROOT_VER=1.26
-source=(http://http.debian.net/debian/pool/main/f/fakeroot/fakeroot_${FAKEROOT_VER}.orig.tar.gz)
+pkgname=fakeroot
+pkgver=1.28
+source=(http://http.debian.net/debian/pool/main/f/$pkgname/${pkgname}_${pkgver}.orig.tar.gz)
 
 build() {
-	cd fakeroot-${FAKEROOT_VER}
+	cd $pkgname-$pkgver
 
 	./configure --prefix=/tools                 \
 	            --libdir=/tools/lib/libfakeroot \

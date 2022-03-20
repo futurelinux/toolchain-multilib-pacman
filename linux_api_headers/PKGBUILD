@@ -1,8 +1,9 @@
-LINUX_VER=5.15.4
-source=(https://www.kernel.org/pub/linux/kernel/v5.x/linux-${LINUX_VER}.tar.xz)
+pkgname=linux-api-headers
+pkgver=5.16.16
+source=(https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.xz)
 
 build() {
-	cd linux-${LINUX_VER}
+	cd  linux-$pkgver
 
 	make mrproper
 

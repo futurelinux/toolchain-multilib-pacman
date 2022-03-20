@@ -1,8 +1,9 @@
-OPENSSL_VER=1.1.1l
-source=(https://www.openssl.org/source/openssl-${OPENSSL_VER}.tar.gz)
+pkgname=openssl
+pkgver=3.0.2
+source=(https://www.openssl.org/source/$pkgname-$pkgver.tar.gz)
 
 build() {
-	cd openssl-${OPENSSL_VER}
+	cd $pkgname-$pkgver
 
 	./config --prefix=/tools             \
 	         --openssldir=/tools/etc/ssl \

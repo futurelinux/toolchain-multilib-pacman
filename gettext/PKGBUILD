@@ -1,8 +1,9 @@
-GETTEXT_VER=0.21
-source=(https://ftp.gnu.org/gnu/gettext/gettext-${GETTEXT_VER}.tar.xz)
+pkgname=gettext
+pkgver=0.21
+source=(https://ftp.gnu.org/gnu/$pkgname/$pkgname-$pkgver.tar.xz)
 
 build() {
-	cd gettext-${GETTEXT_VER}
+	cd $pkgname-$pkgver
 
 	./configure --disable-shared
 

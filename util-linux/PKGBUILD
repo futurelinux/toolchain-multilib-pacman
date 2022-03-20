@@ -1,8 +1,9 @@
-UTIL_LINUX_VER=2.37.2
-source=(https://www.kernel.org/pub/linux/utils/util-linux/v5/util-linux-${UTIL_LINUX_VER}.tar.xz)
+pkgname=util-linux
+pkgver=2.37.4
+source=(https://www.kernel.org/pub/linux/utils/$pkgname/v${pkgver%.*}/$pkgname-$pkgver.tar.xz)
 
 build() {
-	cd util-linux-${UTIL_LINUX_VER}
+	cd $pkgname-$pkgver
 
 	./configure --prefix=/tools                \
 	            --without-python               \

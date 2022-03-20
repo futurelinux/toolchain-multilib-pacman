@@ -1,14 +1,13 @@
-FILE_VER=5.41
-source=(http://ftp.astron.com/pub/file/file-${FILE_VER}.tar.gz)
+pkgname=file
+pkgver=5.41
+source=(ftp://ftp.astron.com/pub/$pkgname/$pkgname-$pkgver.tar.gz)
 
 build() {
-	cd file-${FILE_VER}
+	cd $pkgname-$pkgver
 
 	./configure --prefix=/tools
 
 	make
-
-	make check
 
 	make install
 }

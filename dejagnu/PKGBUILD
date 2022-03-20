@@ -1,12 +1,11 @@
-DEJAGNU_VER=1.6.3
-source=(https://ftp.gnu.org/gnu/dejagnu/dejagnu-${DEJAGNU_VER}.tar.gz)
+pkgname=dejagnu
+pkgver=1.6.3
+source=(https://ftp.gnu.org/gnu/$pkgname/$pkgname-$pkgver.tar.gz)
 
 build() {
-	cd dejagnu-${DEJAGNU_VER}
+	cd $pkgname-$pkgver
 
 	./configure --prefix=/tools
 
 	make install
-
-	make check || true
 }

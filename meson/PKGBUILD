@@ -1,8 +1,9 @@
-MESON_VER=0.60.1
-source=(https://github.com/mesonbuild/meson/releases/download/${MESON_VER}/meson-${MESON_VER}.tar.gz)
+pkgname=meson
+pkgver=0.61.3
+source=(https://github.com/mesonbuild/$pkgname/releases/download/$pkgver/$pkgname-$pkgver.tar.gz)
 
 build() {
-	cd meson-${MESON_VER}
+	cd $pkgname-$pkgver
 
 	python3 setup.py build
 

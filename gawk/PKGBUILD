@@ -1,8 +1,9 @@
-GAWK_VER=5.1.1
-source=(https://ftp.gnu.org/gnu/gawk/gawk-${GAWK_VER}.tar.xz)
+pkgname=gawk
+pkgver=5.1.1
+source=(https://ftp.gnu.org/gnu/$pkgname/$pkgname-$pkgver.tar.xz)
 
 build() {
-	cd gawk-${GAWK_VER}
+	cd $pkgname-$pkgver
 
 	./configure --prefix=/tools
 

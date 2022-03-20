@@ -1,14 +1,13 @@
-GREP_VER=3.7
-source=(https://ftp.gnu.org/gnu/grep/grep-${GREP_VER}.tar.xz)
+pkgname=grep
+pkgver=3.7
+source=(https://ftp.gnu.org/gnu/$pkgname/$pkgname-$pkgver.tar.xz)
 
 build() {
-	cd grep-${GREP_VER}
+	cd $pkgname-$pkgver
 
 	./configure --prefix=/tools
 
 	make
-
-	make check
 
 	make install
 }

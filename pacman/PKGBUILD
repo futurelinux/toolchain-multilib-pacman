@@ -1,8 +1,9 @@
-PACMAN_VER=6.0.1
-source=(https://sources.archlinux.org/other/pacman/pacman-${PACMAN_VER}.tar.xz)
+pkgname=pacman
+pkgver=6.0.1
+source=(https://sources.archlinux.org/other/$pkgname/$pkgname-$pkgver.tar.xz)
 
 build() {
-	cd pacman-${PACMAN_VER}
+	cd $pkgname-$pkgver
 
 	meson --prefix=/tools                      \
 	      --buildtype=release                  \

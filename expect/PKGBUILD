@@ -1,8 +1,9 @@
-EXPECT_VER=5.45.4
-source=(https://downloads.sourceforge.net/expect/expect${EXPECT_VER}.tar.gz)
+pkgname=expect
+pkgver=5.45.4
+source=(https://prdownloads.sourceforge.net/$pkgname/$pkgname$pkgver.tar.gz)
 
 build() {
-	cd expect${EXPECT_VER}
+	cd $pkgname$pkgver
 
 	cp -v configure{,.orig}
 	sed 's:/usr/local/bin:/bin:' configure.orig > configure
@@ -12,8 +13,6 @@ build() {
 	            --with-tclinclude=/tools/include
 
 	make
-
-	make test
 
 	make SCRIPTS="" install
 }

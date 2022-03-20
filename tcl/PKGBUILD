@@ -1,5 +1,5 @@
 pkgname=tcl
-pkgver=8.6.11
+pkgver=8.6.12
 source=(https://downloads.sourceforge.net/$pkgname/$pkgname$pkgver-src.tar.gz)
 
 build() {

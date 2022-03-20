@@ -40,8 +40,8 @@ do
     if [ "$BUILD" == "yes" ]; then
         cd $DIR
         case $PASS in
-            toolchain)
-                $HOME/toolchain/pkgmk -cf $HOME/toolchain/pkgmk.conf -kw 2>&1|tee ${LOG}/$NAME.log || exit 1;;
+            toolchain-multilib-pacman)
+                $HOME/toolchain-multilib-pacman/pkgmk -cf $HOME/toolchain-multilib-pacman/pkgmk.conf -kw 2>&1|tee ${LOG}/$NAME.log || exit 1;;
 
         esac
 	if ( grep "^=======>" ${LOG}/$NAME.log|grep "succeeded"  > /dev/null); then

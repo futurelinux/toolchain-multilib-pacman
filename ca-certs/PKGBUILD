@@ -16,7 +16,7 @@ cat > make-cert.pl << "EOF"
 # Authors: DJ Lucas
 #          Bruce Dubbs
 #
-# Version 20120211
+# Version 20220317
 
 my $certdata = './tempfile.cer';
 
@@ -66,7 +66,7 @@ cat > make-ca.sh << "EOF"
 # Authors: DJ Lucas
 #          Bruce Dubbs
 #
-# Version 20120211
+# Version 20220317
 
 certdata="certdata.txt"
 

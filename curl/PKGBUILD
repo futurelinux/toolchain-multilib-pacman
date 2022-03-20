@@ -1,8 +1,9 @@
-CURL_VER=7.80.0
-source=(https://curl.se/download/curl-${CURL_VER}.tar.xz)
+pkgname=curl
+pkgver=7.82.0
+source=(https://curl.se/download/$pkgname-$pkgver.tar.xz)
 
 build() {
-	cd curl-${CURL_VER}
+	cd $pkgname-$pkgver
 
 	./configure --prefix=/tools            \
 		    --with-ssl                 \

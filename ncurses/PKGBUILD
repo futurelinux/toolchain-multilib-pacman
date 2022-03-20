@@ -1,8 +1,9 @@
-NCURSES_VER=6.3
-source=(https://ftp.gnu.org/gnu/ncurses/ncurses-${NCURSES_VER}.tar.gz)
+pkgname=ncurses
+pkgver=6.3
+source=(ftp://invisible-island.net/$pkgname/$pkgname-$pkgver.tar.gz)
 
 build() {
-	cd  ncurses-${NCURSES_VER}
+	cd $pkgname-$pkgver
 
 	sed -i s/mawk// configure
 

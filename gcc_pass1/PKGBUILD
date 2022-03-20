@@ -1,18 +1,19 @@
-GCC_VER=11.2.0
-GMP_VER=6.2.1
-MPFR_VER=4.1.0
-MPC_VER=1.2.1
-source=(https://ftp.gnu.org/gnu/gcc/gcc-${GCC_VER}/gcc-${GCC_VER}.tar.xz
-https://ftp.gnu.org/gnu/gmp/gmp-${GMP_VER}.tar.xz
-https://ftp.gnu.org/gnu/mpfr/mpfr-${MPFR_VER}.tar.xz
-https://ftp.gnu.org/gnu/mpc/mpc-${MPC_VER}.tar.gz)
+pkgname=gcc_pass1
+pkgver=11.2.0
+gmp_ver=6.2.1
+mpfr_ver=4.1.0
+mpc_ver=1.2.1
+source=(https://ftp.gnu.org/gnu/${pkgname%_*}/${pkgname%_*}-$pkgver/${pkgname%_*}-$pkgver.tar.xz
+https://ftp.gnu.org/gnu/gmp/gmp-${gmp_ver}.tar.xz
+https://ftp.gnu.org/gnu/mpfr/mpfr-${mpfr_ver}.tar.xz
+https://ftp.gnu.org/gnu/mpc/mpc-${mpc_ver}.tar.gz)
 
 build() {
-	cd gcc-${GCC_VER}
+	cd ${pkgname%_*}-$pkgver
 
-	mv ../mpfr-${MPFR_VER} mpfr
-	mv ../gmp-${GMP_VER} gmp
-	mv ../mpc-${MPC_VER} mpc
+	mv ../mpfr-${mpfr_ver} mpfr
+	mv ../gmp-${gmp_ver} gmp
+	mv ../mpc-${mpc_ver} mpc
 
 	for file in gcc/config/{linux,i386/linux{,64}}.h
 	do
@@ -27,9 +28,15 @@ build() {
 		touch $file.orig
 	done
 
-	sed -i -e 's@/lib/ld-linux.so.2@/lib32/ld-linux.so.2@g' gcc/config/i386/linux64.h
-	sed -i -e '/MULTILIB_OSDIRNAMES/d' gcc/config/i386/t-linux64
-	echo "MULTILIB_OSDIRNAMES = m64=../lib m32=../lib32" >> gcc/config/i386/t-linux64
+	sed -e '/m64=/s/lib64/lib/' \
+	    -i.orig gcc/config/i386/t-linux64
+	cat > gcc/config/i386/t-linux64 <<"EOF"
+comma=,
+MULTILIB_OPTIONS    = $(subst $(comma),/,$(TM_MULTILIB_CONFIG))
+MULTILIB_DIRNAMES   = $(patsubst m%, %, $(subst /, ,$(MULTILIB_OPTIONS)))
+MULTILIB_OSDIRNAMES = m64=../lib$(call if_multiarch,:x86_64-linux-gnu)
+MULTILIB_OSDIRNAMES+= m32=../lib32$(call if_multiarch,:i386-linux-gnu)
+EOF
 
 	mkdir -v build
 	cd       build

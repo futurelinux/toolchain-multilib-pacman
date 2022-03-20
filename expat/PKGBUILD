@@ -1,8 +1,9 @@
-EXPAT_VER=2.4.1
-source=(https://github.com/libexpat/libexpat/releases/download/R_${EXPAT_VER//./_}/expat-${EXPAT_VER}.tar.xz)
+pkgname=expat
+pkgver=2.4.7
+source=(https://github.com/libexpat/libexpat/releases/download/R_${pkgver//./_}/$pkgname-$pkgver.tar.xz)
 
 build() {
-	cd  expat-${EXPAT_VER}
+	cd  $pkgname-$pkgver
 
 	./configure --prefix=/tools
 

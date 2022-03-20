@@ -1,8 +1,9 @@
-BINUTILS_VER=2.37
-source=(https://ftp.gnu.org/gnu/binutils/binutils-${BINUTILS_VER}.tar.xz)
+pkgname=binutils_pass1
+pkgver=2.38
+source=(https://ftp.gnu.org/gnu/${pkgname%_*}/${pkgname%_*}-$pkgver.tar.xz)
 
 build() {
-	cd binutils-${BINUTILS_VER}
+	cd ${pkgname%_*}-$pkgver
 
 	mkdir -v build
 	cd       build

@@ -1,8 +1,9 @@
-M4_VER=1.4.19
-source=(https://ftp.gnu.org/gnu/m4/m4-${M4_VER}.tar.xz)
+pkgname=m4
+pkgver=1.4.19
+source=(https://ftp.gnu.org/gnu/$pkgname/$pkgname-$pkgver.tar.xz)
 
 build() {
-	cd m4-${M4_VER}
+	cd $pkgname-$pkgver
 
 	sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' lib/*.c
 	echo "#define _IO_IN_BACKUP 0x100" >> lib/stdio-impl.h
@@ -10,8 +11,6 @@ build() {
 	./configure --prefix=/tools
 
 	make
-
-	make check
 
 	make install
 }

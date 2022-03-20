@@ -1,14 +1,13 @@
-ZLIB_VER=1.2.11
-source=(https://www.zlib.net/zlib-${ZLIB_VER}.tar.xz)
+pkgname=zlib
+pkgver=1.2.11
+source=(https://www.zlib.net/$pkgname-$pkgver.tar.xz)
 
 build() {
-	cd zlib-${ZLIB_VER}
+	cd $pkgname-$pkgver
 
 	./configure --prefix=/tools
 
 	make
-
-	make check
 
 	make install
 
@@ -16,8 +15,6 @@ build() {
 	CC="${LFS_TGT}-gcc -m32" ./configure --prefix=/tools --libdir=/tools/lib32
 
 	make
-
-	make check
 
 	make DESTDIR=$PWD/DESTDIR_32 install &&
 	cp -Rv DESTDIR_32/tools/lib32/* /tools/lib32

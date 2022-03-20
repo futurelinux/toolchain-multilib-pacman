@@ -1,8 +1,9 @@
-LIBARCHIVE_VER=3.5.2
-source=(https://github.com/libarchive/libarchive/releases/download/v${LIBARCHIVE_VER}/libarchive-${LIBARCHIVE_VER}.tar.xz)
+pkgname=libarchive
+pkgver=3.5.2
+source=(https://github.com/$pkgname/$pkgname/releases/download/$pkgver/$pkgname-$pkgver.tar.xz)
 
 build() {
-	cd libarchive-${LIBARCHIVE_VER}
+	cd $pkgname-$pkgver
 
 	./configure --prefix=/tools --without-xml2
 

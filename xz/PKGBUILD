@@ -1,14 +1,13 @@
-XZ_VER=5.2.5
-source=(http://tukaani.org/xz/xz-${XZ_VER}.tar.xz)
+pkgname=xz
+pkgver=5.2.5
+source=(https://tukaani.org/$pkgname/$pkgname-$pkgver.tar.xz)
 
 build() {
-	cd xz-${XZ_VER}
+	cd $pkgname-$pkgver
 
 	./configure --prefix=/tools
 
 	make
-
-	make check
 
 	make install
 
@@ -21,8 +20,6 @@ build() {
 
 	make
 
-	make check
-
-	make DESTDIR=$PWD/DESTDIR_32 install &&
+	make DESTDIR=$PWD/DESTDIR_32 install
 	cp -Rv DESTDIR_32/tools/lib32/* /tools/lib32
 }

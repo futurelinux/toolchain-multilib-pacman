@@ -1,5 +1,5 @@
 pkgname=vim
-pkgver=8.2.4594
+pkgver=8.2.4597
 source=(https://github.com/vim/vim/archive/v$pkgver/$pkgname-$pkgver.tar.gz)
 
 build() {

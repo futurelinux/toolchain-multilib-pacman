@@ -1,14 +1,13 @@
-GZIP_VER=1.11
-source=(https://ftp.gnu.org/gnu/gzip/gzip-${GZIP_VER}.tar.xz)
+pkgname=gzip
+pkgver=1.11
+source=(https://ftp.gnu.org/gnu/$pkgname/$pkgname-$pkgver.tar.xz)
 
 build() {
-	cd gzip-${GZIP_VER}
+	cd $pkgname-$pkgver
 
 	./configure --prefix=/tools
 
 	make
-
-	make check
 
 	make install
 }

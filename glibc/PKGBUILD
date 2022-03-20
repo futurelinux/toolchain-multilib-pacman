@@ -1,5 +1,5 @@
 pkgname=glibc
-pkgver=2.34
+pkgver=2.35
 source=(https://ftp.gnu.org/gnu/$pkgname/$pkgname-$pkgver.tar.xz)
 
 build() {

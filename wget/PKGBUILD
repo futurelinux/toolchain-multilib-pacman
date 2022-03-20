@@ -1,8 +1,9 @@
-WGET_VER=1.21.2
-source=(https://ftp.gnu.org/gnu/wget/wget-${WGET_VER}.tar.gz)
+pkgname=wegt
+pkgver=1.21.2
+source=(https://ftp.gnu.org/gnu/$pkgname/$pkgname-$pkgver.tar.gz)
 
 build() {
-	cd wget-${WGET_VER}
+	cd $pkgname-$pkgver
 
 	./configure --prefix=/tools    \
 		    --disable-pcre     \

@@ -1,14 +1,13 @@
-TCL_VER=8.6.11
-source=(https://downloads.sourceforge.net/tcl/tcl${TCL_VER}-src.tar.gz)
+pkgname=tcl
+pkgver=8.6.11
+source=(https://downloads.sourceforge.net/$pkgname/$pkgname$pkgver-src.tar.gz)
 
 build() {
-	cd tcl${TCL_VER}/unix
+	cd $pkgname$pkgver/unix
 
 	./configure --prefix=/tools
 
 	make
-
-	TZ=UTC make test
 
 	make install
 

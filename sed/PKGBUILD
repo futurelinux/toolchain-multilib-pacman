@@ -1,14 +1,13 @@
-SED_VER=4.8
-source=(https://ftp.gnu.org/gnu/sed/sed-${SED_VER}.tar.xz)
+pkgname=sed
+pkgver=4.8
+source=(https://ftp.gnu.org/gnu/$pkgname/$pkgname-$pkgver.tar.xz)
 
 build() {
-	cd sed-${SED_VER}
+	cd $pkgname-$pkgver
 
 	./configure --prefix=/tools
 
 	make
-
-	make check
 
 	make install
 }
